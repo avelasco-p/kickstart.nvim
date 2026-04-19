@@ -6,3 +6,6 @@ vim.keymap.set('v', '<leader>cce', '<cmd>CopilotChatExplain<CR>', { desc = 'Expl
 
 vim.g.copilot_no_tab_map = true
 vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("Shift-y>")', { expr = true, replace_keycodes = false })
+
+-- Yanking to clipboard
+vim.keymap.set('v', '<leader>y', '"+y')

@@ -1,3 +1,4 @@
+local roslyn = require 'custom.plugins.roslyn'
 --[[
 
 =====================================================================
@@ -480,7 +481,15 @@ require('lazy').setup({
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'mason-org/mason.nvim', opts = {} },
+      {
+        'mason-org/mason.nvim',
+        opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:Crashdummyy/mason-registry',
+          },
+        },
+      },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -694,6 +703,27 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+        roslyn = {
+          settings = {
+            ['csharp|inlay_hints'] = {
+              -- csharp_enable_inlay_hints_for_implicit_object_creation = true,
+              -- csharp_enable_inlay_hints_for_implicit_variable_types = true,
+              -- csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+              csharp_enable_inlay_hints_for_types = true,
+              -- dotnet_enable_inlay_hints_for_indexer_parameters = true,
+              -- dotnet_enable_inlay_hints_for_literal_parameters = true,
+              -- dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+              -- dotnet_enable_inlay_hints_for_other_parameters = true,
+              dotnet_enable_inlay_hints_for_parameters = true,
+              -- dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+              -- dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+              -- dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+            },
+            ['csharp|code_lens'] = {
+              dotnet_enable_references_code_lens = true,
             },
           },
         },
@@ -998,3 +1028,10 @@ vim.cmd.colorscheme 'gruvbox-material'
 -- vim: ts=2 sts=2 sw=2 et
 
 require 'custom/keymaps'
+
+-- Godot Setup
+-- local gdproject = io.open(vim.fn.getcwd() .. '/project.godot', 'r')
+-- if gdproject then
+--   io.close(gdproject)
+--   vim.fn.serverstart './godothost'
+-- end
