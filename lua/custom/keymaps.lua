@@ -12,3 +12,5 @@ vim.keymap.set('i', '<S-Tab>', 'copilot#Accept("Shift-y>")', { expr = true, repl
 vim.keymap.set('v', '<leader>y', '"+y')
 
 vim.keymap.set('n', '<leader>gb', build.build_nearest_godot_project, { desc = 'Build nearest Godot project' })
+
+vim.keymap.set('n', 'gK', '<cmd>GodotDocs<CR>', { desc = 'Godot docs' })
